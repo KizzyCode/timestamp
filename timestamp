@@ -1,0 +1,39 @@
+#!/bin/sh
+
+arg_alphabetically=false
+arg_nospace=false
+
+# Print help
+function help() {
+	echo "Usage: $0 [parameters]"
+	echo "Parameters:"
+	echo "    --alphabetically    Creates an alphabetically sortable timestamp (Year-Month-Day)"
+	echo "    --no-space          Creates a timestamp without spaces"
+	echo ""
+	exit 1
+}
+
+# Parse arguments
+for arg in "$@"; do
+	case "$arg" in
+		"--alphabetically" ) arg_alphabetically=true ;;
+		"--no-space" ) arg_nospace=true ;;
+		"--help" ) help ;;
+		* ) echo "Invalid parameter \"$arg\""; echo; help ;;
+	esac
+done
+
+# Create timestamps
+if $arg_alphabetically && $arg_nospace; then
+	date "+%Y.%m.%d-%Hh%Mm%Ss%Z";
+
+elif $arg_alphabetically; then
+	date "+%Y.%m.%d %Hh%Mm%Ss %Z";
+
+elif $arg_nospace; then
+	date "+%d.%m.%Y-%Hh%Mm%Ss%Z";
+
+else
+	date "+%d.%m.%Y %Hh%Mm%Ss %Z";
+
+fi
