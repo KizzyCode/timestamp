@@ -4,7 +4,7 @@ arg_alphabetically=false
 arg_nospace=false
 
 # Print help
-function help() {
+help () {
 	echo "Usage: $0 [parameters]"
 	echo "Parameters:"
 	echo "    --alphabetically    Creates an alphabetically sortable timestamp (Year-Month-Day)"
